@@ -66,3 +66,8 @@ for i, row in tqdm(train.iterrows(), total=len(train)):
     word_ids, vectors, oov_percentage = tokenize_lyrics(row['lyrics'])
     key = song_name + ' ' + artist
     lyrics_dict[key] = word_ids
+
+# save as pkl file
+lyrics_pkl_path = r'/home/munz/school/deep_learning/hw3/lyrics_dict.pkl'
+with open(lyrics_pkl_path, 'wb') as f:
+    pkl.dump(lyrics_dict, f)
