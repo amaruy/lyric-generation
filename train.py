@@ -4,6 +4,8 @@ from torch.optim import Adam
 from tqdm.auto import tqdm
 import pickle
 from torch.utils.data import Dataset, DataLoader
+import time
+import sys
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -94,7 +96,9 @@ def train_model(model, train_loader, config):
     
     for epoch in range(config["epochs"]):
         total_loss = 0
-        progress_bar = tqdm(enumerate(train_loader), total=len(train_loader), leave=False)
+        verbosity = False
+        # only show progress bar if verbosity is True
+        progress_bar = tqdm(enumerate(train_loader), total=len(train_loader), leave=False, disable=not verbosity)
         for i, (input_words, target_words) in progress_bar:
             input_words, target_words = input_words.to(config["device"]), target_words.to(config["device"])
             
@@ -116,23 +120,35 @@ def train_model(model, train_loader, config):
         
         print(f"Epoch {epoch+1} Completed. Avg Loss: {avg_loss:.4f}")
 
+def memory_stats():
+    t = torch.cuda.get_device_properties(0).total_memory
+    r = torch.cuda.memory_reserved(0)
+    a = torch.cuda.memory_allocated(0)
+    f = r-a  # free inside reserved
+    print(f'total memory: {t}, reserved memory: {r}, allocated memory: {a}, free memory: {f}')
 
+print("Starting training...", flush=True)
 # Configuration parameters
 config = {
-    "batch_size": 64,
+    "batch_size": 8,
     "learning_rate": 0.001,
-    "hidden_dim": 256,
+    "hidden_dim": 128,
     "num_layers": 2,
-    "embedding_dim": 100,  # Assuming we know the embedding dimension
+    "embedding_dim": 300,  # Assuming we know the embedding dimension
     "vocab_size": 3000000,  # Make sure this matches the actual vocab size
     "device": torch.device("cuda" if torch.cuda.is_available() else "cpu"),
-    "batch_size": 64,
     "shuffle": False,
+    "epochs": 10
 }
+
+# clear cached memory if config['device'] is cuda
+if config['device'] == torch.device('cuda'):
+    torch.cuda.empty_cache()
+
 
 config["experiment_name"] = f"lstm_{config['hidden_dim']}_{config['num_layers']}_{config['learning_rate']}"
 print(config)
-
+print("Loading pre-trained Word2Vec embeddings...")
 # load pre-trained Word2Vec embeddings
 embedding_weights = torch.load('models/word2vec_weights.pt')
 vocab_size, embedding_dim = embedding_weights.shape
@@ -144,6 +160,10 @@ lstm_model.to(device)
 print("LSTM Model:")
 print(lstm_model)
 
+# print memory stats
+memory_stats()
+
+
 # Load the pre-processed dataset
 with open('data/lyrics_dict.pkl', 'rb') as f:
     lyrics_dict = pickle.load(f)
@@ -153,10 +173,12 @@ train_loader = DataLoader(dataset, batch_size=config['batch_size'], shuffle=conf
 print("Dataset loaded successfully!")
 print(f"Number of training samples: {len(dataset)}")
 print('Training...')
+start = time.time()
 # train the model
 train_model(lstm_model, train_loader, config)
-print("Training complete! saving model weights...")
+print(f"Training complete! Time taken: {time.time() - start:.2f} seconds")
+print(f"saving model weights to models/{config['experiment_name']}_weights.pth...")
 # save model weights
-torch.save(lstm_model.state_dict(), 'models/lstm_model_weights.pth')
+torch.save(lstm_model.state_dict(), f'models/{config["experiment_name"]}_weights.pth')
 
 print("Done!")
