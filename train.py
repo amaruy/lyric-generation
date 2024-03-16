@@ -119,18 +119,18 @@ def train_model(model, train_loader, config):
 
 # Configuration parameters
 config = {
-    "experiment_name": "LSTM_Word2Vec_100d_256h_1l_001lr_100e_64b",
-    "epochs": 100,
     "batch_size": 64,
     "learning_rate": 0.001,
     "hidden_dim": 256,
-    "num_layers": 1,
+    "num_layers": 2,
     "embedding_dim": 100,  # Assuming we know the embedding dimension
     "vocab_size": 3000000,  # Make sure this matches the actual vocab size
     "device": torch.device("cuda" if torch.cuda.is_available() else "cpu"),
     "batch_size": 64,
     "shuffle": False,
 }
+
+config["experiment_name"] = f"lstm_{config['hidden_dim']}_{config['num_layers']}_{config['learning_rate']}"
 print(config)
 
 # load pre-trained Word2Vec embeddings
