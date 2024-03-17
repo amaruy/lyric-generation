@@ -1,30 +1,17 @@
-import numpy as np
+
 import pandas as pd
-import matplotlib.pyplot as plt
-import os
 from tqdm import tqdm
 import pickle as pkl
 import re
-
-import pretty_midi
 from gensim.models import KeyedVectors
 from gensim.parsing.preprocessing import remove_stopwords, strip_punctuation, strip_numeric
 import gensim.downloader as api
+import sys
+sys.path.append('../')
 
-from sklearn.model_selection import train_test_split
-import torch
-from torch import nn
-import torch.optim as optim
-import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader
-from sklearn.preprocessing import StandardScaler
 
-import nltk
-# nltk.download('punkt')
-from nltk.tokenize import sent_tokenize
-
-train_path = r'/home/munz/school/deep_learning/hw3/lyrics_train_set2.csv'
-test_path = r'/home/munz/school/deep_learning/hw3/lyrics_test_set.csv'
+train_path = r'data/lyrics_train_set2.csv'
+test_path = r'data/lyrics_test_set.csv'
 
 train = pd.read_csv(train_path)
 test = pd.read_csv(test_path)
@@ -34,8 +21,16 @@ train['song'] = train['song'].str.strip()
 test['artist'] = test['artist'].str.strip()
 test['song'] = test['song'].str.strip()
 
-word2vec_path = r'/home/munz/school/deep_learning/hw3/GoogleNews-vectors-negative300.bin.gz'
-word2vec_model = KeyedVectors.load_word2vec_format(word2vec_path, binary=True)
+try:
+    word2vec_path = r'models/GoogleNews-vectors-negative300.bin.gz'
+    word2vec_model = KeyedVectors.load_word2vec_format(word2vec_path, binary=True)
+except:
+    try:
+        word2vec_path = r'models/word2vec-google-news-300.model'
+        word2vec_model = KeyedVectors.load(word2vec_path)
+    except:
+        word2vec_model = api.load('word2vec-google-news-300')
+        word2vec_model.save(r'models/word2vec-google-news-300.model')
 
 bos_token = 'BOS '
 eos_token = ' EOS '
@@ -68,6 +63,6 @@ for i, row in tqdm(train.iterrows(), total=len(train)):
     lyrics_dict[key] = word_ids
 
 # save as pkl file
-lyrics_pkl_path = r'/home/munz/school/deep_learning/hw3/lyrics_dict.pkl'
+lyrics_pkl_path = r'data/lyrics_dict.pkl'
 with open(lyrics_pkl_path, 'wb') as f:
     pkl.dump(lyrics_dict, f)
