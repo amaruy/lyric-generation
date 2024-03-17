@@ -6,6 +6,7 @@ from gensim.models import KeyedVectors
 import numpy as np
 from models.lstm import LSTMModel
 
+
 class LyricsGenerator:
     def __init__(self, lstm_model, word2vec_model, midi_embeddings=None, device='cpu'):
         """
@@ -47,7 +48,6 @@ class LyricsGenerator:
         - song_key (str): The key identifying the song's MIDI embedding to use.
         - max_length (int): Maximum length of the generated lyrics.
         - temperature (float): Controls the randomness of the sampling. Higher values lead to more random outputs.
-        
         Returns:
         - str: The generated lyrics.
         """
@@ -93,6 +93,8 @@ def main():
     with open('data/midi_embeddings.pkl', 'rb') as f:
         midi_embeddings = pickle.load(f)
 
+    tunes = list(midi_embeddings.keys())
+
     # load word2vec model
     word2vec_model = KeyedVectors.load('models/weights/word2vec-google-news-300.model')
 
@@ -106,15 +108,28 @@ def main():
     lyrics_generator = LyricsGenerator(lstm_model, word2vec_model, midi_embeddings, device=device)
     print("Lyrics Generator Initialized!")
     # Generate lyrics with a specific song key and seed text
-    song_key = input("Enter a song_name artist lke 'hello adele' to generate lyrics:")
+    song_key = input("""Hi! I am a lyrics generator!
+To generate a song, enter a song artist pair like 'hello adele' and I will generate lyrics based on the music of the song.
+Type 'songs' to see the list of songs I can generate lyrics for.
+Input:""")
     seed_text = 'BOS'
     max_length = 100
     temperature = 1.0  # Adjust for creativity
 
 
     while song_key:
+        if song_key == 'songs':
+            print("List of songs I can generate lyrics for:")
+            for song in tunes:
+                print(song)
+            song_key = input("Enter a song_name artist lke 'hello adele' to generate lyrics:")
+            continue
         generated_lyrics = lyrics_generator.generate(song_key=song_key, seed_text=seed_text, max_length=max_length, temperature=temperature)
-        print(f"Generated Lyrics based on the music of {song_key}:\n", generated_lyrics)
+
+        print(f"Generated Lyrics based on the music of {song_key}:")
+        print('-----------------------------------')
+        print(generated_lyrics)
+        print('-----------------------------------')
         song_key = input("Enter a song_name artist lke 'hello adele' to generate lyrics:")
 
 
