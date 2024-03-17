@@ -5,9 +5,8 @@ import pickle
 import argparse
 import sys
 sys.path.append('../')
-from models.lstmmidi import LSTMMidiModel, LyricsMIDIDataset
-from models.lstm import LSTMModel, LyricsDataset
-from utils.train_utils import memory_stats, clear_memory, load_pretrained, train_model
+from models.lstm import LSTMModel, LyricsMIDIDataset
+from utils.train_utils import memory_stats, clear_memory, load_pretrained, train_model, prepare_data
 
 
 """
@@ -18,32 +17,29 @@ This script trains the LSTM model on the given dataset, using preprocessed conca
 def main(config):
     pprint(config)
     print("Starting training...", flush=True)
+    config["experiment_name"] = f"{config['model']}_{config['hidden_dim']}_{config['num_layers']}_{config['learning_rate']}"
 
 
-    # clear cached memory if config['device'] is cuda
-    memory_stats()
+    # memory stats
+    memory_stats(config['device'])
     clear_memory(config['device'])
 
     # load dataset
     print('Loading dataset...')
-    if config['model'] == 'lstmmidi':     
-        config["experiment_name"] = f"lstm_int_{config['hidden_dim']}_{config['num_layers']}_{config['learning_rate']}"
-        preloaded_inputs = torch.load('data/dataset_saved_inputs.pt')
-        preloaded_targets = torch.load('data/dataset_saved_targets.pt')
-        preloaded_targets = torch.tensor(preloaded_targets, dtype=torch.long)  # Ensure targets are long
-        dataset = LyricsMIDIDataset(preloaded_inputs=preloaded_inputs, preloaded_targets=preloaded_targets)
-        
-    
-    elif config['model'] == 'lstm':
-        with open('data/lyrics_dict.pkl', 'rb') as f:
-            lyrics_dict = pickle.load(f)
-
-        dataset = LyricsDataset(lyrics_dict)
-
-    else:
-        print(f"Invalid model type: {config['model']}")
-        sys.exit(1)
-        
+    try:
+        preloaded_inputs = torch.load(f'../data/{config["model"]}_input.pt')
+        preloaded_targets = torch.load(f'../data/{config["model"]}_target.pt')
+            
+    except FileNotFoundError:
+        print(f"No preprocessed data found for {config['model']}. Preprocessing data...")
+        preloaded_inputs, preloaded_targets = prepare_data(config['model'])
+        torch.save(preloaded_inputs, f'../data/{config["model"]}_input.pt')
+        torch.save(preloaded_targets, f'../data/{config["model"]}_target.pt')
+         
+    preloaded_targets = torch.tensor(preloaded_targets, dtype=torch.long)  # Ensure targets are long
+    dataset = LyricsMIDIDataset(preloaded_inputs=preloaded_inputs, preloaded_targets=preloaded_targets)      
+         
+         
     print("Dataset loaded successfully!")
     print(f"Number of training samples: {len(dataset)}")
 
@@ -51,19 +47,10 @@ def main(config):
     input_dim = dataset.inputs.shape[-1]
     print("Input Dimension:", input_dim)
     print('Initializing LSTM model...')
-    if config['model'] == 'lstmmidi':
-        lstm_model = LSTMMidiModel(input_dim=input_dim, hidden_dim=config['hidden_dim'], vocab_size=config['vocab_size'], num_layers=config['num_layers']) 
-    elif config['model'] == 'lstm':
-        embedding_weights = torch.load('models/word2vec_weights.pt')
-        vocab_size, embedding_dim = embedding_weights.shape
-        lstm_model = LSTMModel(embedding_weights=embedding_weights, hidden_dim=256, vocab_size=vocab_size, num_layers=1)
-
-    else:
-        print(f"Invalid model type: {config['model']}")
-        sys.exit(1)
-    
+    lstm_model = LSTMModel(input_dim=input_dim, hidden_dim=config['hidden_dim'], vocab_size=config['vocab_size'], num_layers=config['num_layers'])     
     lstm_model = load_pretrained(lstm_model, f'models/{config["experiment_name"]}_weights.pth')
-
+    print("LSTM Model:")
+    print(lstm_model)
     # train
     print("Training...", flush=True)
     start = time.time()
@@ -75,7 +62,7 @@ def main(config):
 
 # Configuration parameters
 config = {
-    'model': 'lstm',  # 'lstm' or 'lstmmidi'
+    'model': 'lstm',  # 'lstm' or 'lstm_midi'
     "batch_size": 64,
     "learning_rate": 0.001,
     "hidden_dim": 2,
@@ -91,7 +78,7 @@ config = {
 if __name__ == "__main__":
     # arguments
     parser = argparse.ArgumentParser(description="Training script for the Lyrics Generation model.")
-    parser.add_argument("--model", default="lstm", type=str, help="The model to train: 'lstm' or 'lstmmidi'.")
+    parser.add_argument("--model", default="lstm", type=str, help="The model to train: 'lstm' or 'lstm_midi'.")
     parser.add_argument("--batch_size", type=int, default=64, help="The batch size for training.")
     parser.add_argument("--device", type=str, default='cpu', help="The device to use for training: 'cpu' or 'cuda'.")
     parser.add_argument("--learningrate", type=float, default=0.001, help="The learning rate for training.")

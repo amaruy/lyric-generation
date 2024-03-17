@@ -8,13 +8,19 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import time
+import pickle
+from gensim.models import KeyedVectors
+import sys
+import numpy as np
+sys.path.append('../')
 
-def memory_stats():
-    t = torch.cuda.get_device_properties(0).total_memory
-    r = torch.cuda.memory_reserved(0)
-    a = torch.cuda.memory_allocated(0)
-    f = r-a  # free inside reserved
-    print(f'total memory: {t}, reserved memory: {r}, allocated memory: {a}, free memory: {f}')
+def memory_stats(device):
+    if device == torch.device('cuda'):
+        t = torch.cuda.get_device_properties(0).total_memory
+        r = torch.cuda.memory_reserved(0)
+        a = torch.cuda.memory_allocated(0)
+        f = r-a  # free inside reserved
+        print(f'total memory: {t}, reserved memory: {r}, allocated memory: {a}, free memory: {f}')
  
 
 def clear_memory(device):
@@ -43,7 +49,7 @@ def train_model(model, train_set, config):
     - target_words are the indices of the target words to predict.
     """
     train_loader = DataLoader(train_set, batch_size=config['batch_size'], shuffle=config['shuffle'])  
-    writer = SummaryWriter(f"runs/{config['experiment_name']}")
+    writer = SummaryWriter(f"../runs/{config['experiment_name']}")
     model.train()  # Ensure the model is in training mode
     optimizer = Adam(model.parameters(), lr=config["learning_rate"])
     criterion = CrossEntropyLoss() 
@@ -63,16 +69,52 @@ def train_model(model, train_set, config):
             loss.backward()  # Backward pass
             optimizer.step()  # Update weights
 
-            total_loss += loss.item()  # Accumulate loss
-            progress_bar.set_description(f"Epoch {epoch+1} Loss: {total_loss/(i+1):.4f}")
-        
+            total_loss += loss.item()  # Accumulate loss            
+            # Log the loss to TensorBoard every 100 iteration
+            if i % 100 == 0:
+                writer.add_scalar('training_loss', loss.item(), epoch*len(train_loader) + i)
+                writer.flush()
         avg_loss = total_loss / len(train_loader)  # Calculate average loss
-        writer.add_scalar('training_loss', avg_loss, epoch+1)  # Log to TensorBoard
-        print(f"Epoch {epoch+1} Completed. Avg Loss: {avg_loss:.4f}")
+        print(f"Epoch {epoch+1} Completed. Avg Loss: {avg_loss:.4f}", flush=True)
 
     writer.close()  # Close the TensorBoard writer
     # Save the model weights
     if config.get("save", True):
-        torch.save(model.state_dict(), f'models/{config["experiment_name"]}_weights.pth')
+        torch.save(model.state_dict(), f'../models/{config["experiment_name"]}_weights.pth')
         print(f"Model weights saved to models/{config['experiment_name']}_weights.pth")
     return model
+
+def prepare_data(model_name):
+    # load lyrics dictionary
+    lyrics_pkl_path = r'../data/lyrics_dict.pkl'
+    with open(lyrics_pkl_path, 'rb') as f:
+        lyrics_dict = pickle.load(f)
+
+    # load word2vec model
+    word2vec_path = r'../models/weights/word2vec-google-news-300.model'
+    word2vec_model = KeyedVectors.load(word2vec_path)
+
+    # if lstm_midi, load midi embeddings dictionary
+    if model_name == 'lstm_midi':
+        midi_embeddings_pkl_path = r'../data/midi_embeddings.pkl'
+        with open(midi_embeddings_pkl_path, 'rb') as f:
+            midi_embeddings_dict = pickle.load(f)
+
+    else: # create a dummy dictionary
+        midi_embeddings_dict = {k: np.array([]) for k in lyrics_dict.keys()}
+    
+    inputs = []
+    targets = []
+    missing_songs = set(lyrics_dict.keys()) ^ set(midi_embeddings_dict.keys())
+    print(f"Number of missing songs: {len(missing_songs)}")
+    for song_key, word_indices in lyrics_dict.items():
+        if song_key not in midi_embeddings_dict:
+            continue  # Skip songs without a corresponding MIDI embedding
+        midi_embedding = torch.tensor(midi_embeddings_dict[song_key]).squeeze(0)  # MIDI embedding for the current song
+        for i in range(len(word_indices) - 1):
+            # Convert word indices to embeddings
+            word_embedding_current = torch.tensor(word2vec_model[word_indices[i]])
+            next_word_indice = word_indices[i + 1]
+            inputs.append(torch.cat([word_embedding_current, midi_embedding]))
+            targets.append(next_word_indice)
+    return torch.stack(inputs), torch.tensor(targets, dtype=torch.long)

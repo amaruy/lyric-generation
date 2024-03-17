@@ -1,103 +1,106 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
-
+import numpy as np
 
 
 class LSTMModel(nn.Module):
-    def __init__(self, embedding_weights, hidden_dim, vocab_size, num_layers=1):
+    def __init__(self, input_dim, hidden_dim, vocab_size, num_layers=1):
         """
-        Initializes the LSTM model.
-        
+        Initializes the modified LSTM model to accept concatenated word and MIDI embeddings as input.
+
         Parameters:
-        - embedding_weights: Pre-trained Word2Vec embeddings.
-        - hidden_dim: The number of features in the hidden state `h` of the LSTM.
-        - vocab_size: The size of the vocabulary.
-        - num_layers: Number of recurrent layers (default=1).
+        - input_dim (int): The dimensionality of the concatenated input vector (word embedding + MIDI embedding).
+        - hidden_dim (int): The number of features in the hidden state `h` of the LSTM.
+        - vocab_size (int): The size of the vocabulary, used for the output layer dimension.
+        - num_layers (int): Number of recurrent layers (default=1).
         
-        The input to the model is expected to be a batch of word indices,
+        The input to the model is expected to be a batch of concatenated word and MIDI embeddings,
         and the output is a batch of predictions for the next word.
         """
         super(LSTMModel, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
 
-        # Embedding layer with pre-trained weights
-        self.word_embeddings = nn.Embedding.from_pretrained(embedding_weights, freeze=True)
+        # LSTM layer takes concatenated embeddings as inputs
+        self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers, batch_first=True)
 
-        # The LSTM takes word embeddings as inputs and outputs hidden states
-        self.lstm = nn.LSTM(embedding_weights.shape[1], hidden_dim, num_layers, batch_first=True)
-
-        # The linear layer maps from hidden state space to vocabulary space
+        # Linear layer that maps from hidden state space to vocabulary space
         self.linear = nn.Linear(hidden_dim, vocab_size)
 
-    def forward(self, input_word_indices):
+    def forward(self, concatenated_embeddings):
         """
-        Defines the forward pass of the model.
+        Defines the forward pass of the model using concatenated word and MIDI embeddings.
         
         Parameters:
-        - input_word_indices: A batch of word indices as input.
+        - concatenated_embeddings: A batch of concatenated word and MIDI embeddings.
         
         Returns:
         - output: The model's predictions for the next word.
         """
-        embeddings = self.word_embeddings(input_word_indices)
-        lstm_out, _ = self.lstm(embeddings)
+        lstm_out, _ = self.lstm(concatenated_embeddings)
         output = self.linear(lstm_out)
         return output
-    
-class LyricsDataset(Dataset):
-    def __init__(self, lyrics_dict):
-        """
-        Initializes the dataset with preprocessed lyrics.
-        
-        Parameters:
-        lyrics_dict (dict): A dictionary where keys are 'song_name artist' and values are lists of word indices.
-        """
-        self.lyrics_indices = [indices for indices in lyrics_dict.values()]
-        self.all_indices = [idx for sublist in self.lyrics_indices for idx in sublist]
-    
-    def __len__(self):
-        """Returns the total number of word indices in the dataset."""
-        return len(self.all_indices) - 1  # Subtract 1 because we use a look-ahead of 1 for targets
-    
-    def __getitem__(self, index):
-        """
-        Returns a tuple (current_word_index, next_word_index) for training.
-        
-        Parameters:
-        index (int): The index of the current word.
-        
-        Returns:
-        tuple: A tuple of tensors (current_word_index, next_word_index).
-        """
-        return (torch.tensor(self.all_indices[index], dtype=torch.long), 
-                torch.tensor(self.all_indices[index + 1], dtype=torch.long))
+       
 
-class LyricsDataset(Dataset):
-    def __init__(self, lyrics_dict):
+class LyricsMIDIDataset(Dataset):
+    def __init__(self, lyrics_dict=None, midi_embeddings=None, word2vec_model=None, preloaded_inputs=None, preloaded_targets=None):
         """
-        Initializes the dataset with preprocessed lyrics.
+        Initializes the dataset with either raw data to be processed or preloaded processed data.
         
         Parameters:
-        lyrics_dict (dict): A dictionary where keys are 'song_name artist' and values are lists of word indices.
+        - lyrics_dict (dict): Raw lyrics data.
+        - midi_embeddings (dict): Raw MIDI embeddings.
+        - word2vec_model: The Word2Vec model.
+        - preloaded_inputs (torch.Tensor): Preloaded inputs tensor.
+        - preloaded_targets (torch.Tensor): Preloaded targets tensor.
         """
-        self.lyrics_indices = [indices for indices in lyrics_dict.values()]
-        self.all_indices = [idx for sublist in self.lyrics_indices for idx in sublist]
-    
+        if preloaded_inputs is not None and preloaded_targets is not None:
+            self.inputs = preloaded_inputs
+            self.targets = preloaded_targets
+        else:
+            self.inputs = []
+            self.targets = []
+            # get all songs that arent in keys of midi_embeddings or lyrics_dict
+            self.missing_songs = set(lyrics_dict.keys()) ^ set(midi_embeddings.keys())
+
+            for song_key, word_indices in lyrics_dict.items():
+                if song_key not in midi_embeddings:
+                    continue  # Skip songs without a corresponding MIDI embedding
+                midi_embedding = midi_embeddings[song_key]  # MIDI embedding for the current song
+
+                for i in range(len(word_indices) - 1):
+                    # Convert word indices to embeddings
+                    word_embedding_current = word2vec_model[word_indices[i]]
+                    next_word_indice = word_indices[i + 1]
+
+                    # Concatenate word embedding with MIDI embedding for the input
+                    word_embedding_current = word_embedding_current.reshape(1, -1)  # Reshape to (1, embedding_dim)
+                    input_feature = np.concatenate([word_embedding_current, midi_embedding], axis=1)
+                    self.inputs.append(input_feature)
+                    self.targets.append(next_word_indice)
+
+            # Convert lists to tensors for PyTorch compatibility
+            self.inputs = torch.tensor(self.inputs, dtype=torch.float)
+            self.targets = torch.tensor(self.targets, dtype=torch.long)
+
     def __len__(self):
-        """Returns the total number of word indices in the dataset."""
-        return len(self.all_indices) - 1  # Subtract 1 because we use a look-ahead of 1 for targets
-    
-    def __getitem__(self, index):
+        """Returns the total number of input-target pairs."""
+        return len(self.inputs)
+
+    def __getitem__(self, idx):
         """
-        Returns a tuple (current_word_index, next_word_index) for training.
+        Returns an input-target pair by index.
         
         Parameters:
-        index (int): The index of the current word.
+        - idx (int): The index of the input-target pair.
         
         Returns:
-        tuple: A tuple of tensors (current_word_index, next_word_index).
+        - tuple: A tuple containing the input feature tensor and target tensor.
         """
-        return (torch.tensor(self.all_indices[index], dtype=torch.long), 
-                torch.tensor(self.all_indices[index + 1], dtype=torch.long))
+        return self.inputs[idx], self.targets[idx]
+
+
+
+
+
