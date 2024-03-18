@@ -67,5 +67,5 @@ def process_midi_files(directory, output_file):
 
 # Example usage
 midi_directory = 'data/midi_files'
-output_file = 'midi_feature_vectors.pkl'
+output_file = 'data/midi_feature_vectors.pkl'
 process_midi_files(midi_directory, output_file)

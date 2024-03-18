@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 from torch.utils.data import DataLoader, Dataset
+import pickle
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -161,4 +162,23 @@ def generate_embeddings(autoencoder, feature_vectors, device=torch.device("cpu")
     return embeddings   
 
 
+if __name__ == "__main__":
+    # Example usage
+    print("Loading feature vectors from 'data/midi_feature_vectors.pkl'")
+    with open("../data/midi_feature_vectors.pkl", "rb") as f:
+        feature_vectors = pickle.load(f)
+    print(f"Loaded {len(feature_vectors)} feature vectors")
+    print("Training the autoencoder...")
+    input_size = len(list(feature_vectors.values())[0])
+    autoencoder = Autoencoder(input_size, embedding_dim=1024)
+    criterion = nn.MSELoss()
+    optimizer = torch.optim.Adam(autoencoder.parameters(), lr=0.001)
+    autoencoder = train_autoencoder(autoencoder, feature_vectors, criterion, optimizer, num_epochs=1000)
+    print("Training complete.")
+    print("Generating and saving embeddings...")
+    embeddings = generate_embeddings(autoencoder, feature_vectors)
+    # save the embeddings
+    with open('../data/midi_embeddings.pkl', 'wb') as f:
+        pickle.dump(embeddings, f)
 
+    print(f"Saved embeddings to 'data/midi_embeddings.pkl'")
