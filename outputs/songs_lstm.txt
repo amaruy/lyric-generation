@@ -1,0 +1,83 @@
+lyric generator with out autoencoder:
+---------------------------------
+Song: all the small things blink 182, First word: close
+Generated Lyrics:
+ close some hard s no loved from me 
+ my turn me ho ho ho ho ho ho 
+ very the say the show you go 
+ show 
+ put 
+ my 
+ be minute ho 
+ the meaning with the show you or me no bear flight me ho ho seemed you don boy ho ho 
+ the 
+ no loved my ho ho ho ho go 
+ show you had you say me 
+ you know you or like 
+ no go 
+ from the meaning 
+ all fun 
+ ho x d you 
+ you go go 
+
+---------------------------------
+Song: barbie girl aqua, First word: hiya
+Generated Lyrics:
+ hiya huh mine the light home fall again apart you that you you you fall you see me my own it s mine loving 
+ how you fall 
+ don t allow the love i ve know how far bad love me my mind in falling 
+ tell me i ve been child 
+ you do anything wanted it s part 
+ you tell me know 
+ my heart is the best woman s the air the long 
+ you should 
+ just fast through my nights 
+ don t live free your name i would you really you you walk
+---------------------------------
+Song: eternal flame the bangles, First word: all
+Generated Lyrics:
+ all again my own apart moving in fire wine again again 
+ i want the 
+ perfect inside 
+ the into my own trees is i are behind it 
+ though 
+ we re so s emptiness is smile 
+ name this 
+ the is 
+ i am 
+ once 
+ as fire word grows you lost t do the gun apart make anymore 
+ when we needed forgive i am s night 
+ i know 
+ sleeping flowers ring 
+ i was eternity 
+ 
+
+---------------------------------
+Song: honesty billy joel, First word: if
+Generated Lyrics:
+ if you go on the hands cubes 
+ yes how could you want talk at the top 
+ from the same floor side m very because time world on the things 
+ yes i need thing i ve very got something please don t bad over 
+ the same floor side 
+ yes 
+
+---------------------------------
+Song: lovefool cardigans, First word: dear
+Generated Lyrics:
+ dear waitin look 
+ i do em store no run run run cookin 
+ til lead 
+ she from with her roughness for fuck yeah s go t look run now the run run run run run run run for you slim run smoke till the human 
+ lido the hair run burn ya 
+ blow there you slim run in her assassin 
+ the run run fantasy outta 
+ sayin 
+ the floor run run 
+ losing for with haters 
+ losing 
+ with 
+ she start through quiet run it 
+ she s roll run with you jump run
+---------------------------------

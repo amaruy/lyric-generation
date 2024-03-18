@@ -1,0 +1,80 @@
+lyric generator with autoencoder:
+---------------------------------
+Song: all the small things blink 182, First word: close
+Generated Lyrics:
+ close my guitar x 
+ never no knowin ho ho ho 
+ that quick ho don you don if you stay no don i got you don 
+ you or your 
+ wind flight 
+ the d you or the say 
+ put long ho s have your y say 
+ don you 
+ lookin 
+ you ve be me shine me 
+ those was no makin ho 
+ there for young shine the saw 
+ it long ho ho ho seemed you 
+ think 
+ gone 
+ show me go the la stay 
+ kind 
+ those say those say
+---------------------------------
+Song: barbie girl aqua, First word: hiya
+Generated Lyrics:
+ hiya huh that you see me see me fall 
+ let how is the moves the song you 
+ you fall you do anything need you my mind 
+ how it s never you fall the more the moves in the moves right free what how do anything do anything know how you see it s 
+ your big the love me with the loving you the song 
+ just s want anything want not you you you could start you you may anybody tell me at the soul fall here apart you fall in the big the soul 
+
+---------------------------------
+Song: eternal flame the bangles, First word: all
+Generated Lyrics:
+ all my own within my own 
+ out word 
+ i really take up 
+ should yeah went by my own 
+ the tries him dreams i m never do again would it fair words 
+ nothing 
+ should deep truth 
+ i m always i 
+ i hold the 
+ upon bed 
+ for bed 
+ the wall 
+ should it tries gone my own truth for bed music 
+ should see the 
+ again again 
+ i m back my own truth me went so 
+ so again again alone 
+ is for bed bells 
+ drive my own
+---------------------------------
+Song: honesty billy joel, First word: if
+Generated Lyrics:
+ if me like yes shoot me like i need enough far bad come on the rest 
+ how could follow us may live 
+ yes please don t known yes please change clothes green your power new way 
+ yes shoot me like me found only enough far talkin in the way had with yes 
+ yes you re enough far 
+ yes please change so you behind walk 
+ yes please change new time 
+ when yes oh whoa shoot me like there said chance as yes oh shoot me like my game them may you re nothing s something
+---------------------------------
+Song: lovefool cardigans, First word: dear
+Generated Lyrics:
+ dear waitin mony 
+ well will eventually diez mo like 
+ for her surgeons 
+ don t more in bed double run run run run for run shot run for you slim run run run cookin til raw run you went t run run bed what after bed damn 
+ it blow blow too it 
+ well till what will gotta it the run with with you slim run 
+ what for fuck 
+ do your invisible are hit her saloon till what losing em shit white 
+ comin it 
+ losing em she run blow there 
+ another fantasy til
+---------------------------------

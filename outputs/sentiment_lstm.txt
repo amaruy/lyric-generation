@@ -1,0 +1,233 @@
+lyric generator without autoencoder:
+---------happy---------
+---------------------------------
+Song: all the small things blink 182, First word: happy
+Generated Lyrics:
+ happy 
+
+---------------------------------
+Song: barbie girl aqua, First word: happy
+Generated Lyrics:
+ happy 
+ you do anything fill 
+ you do anything need live you you be the one heart 
+ my mind 
+ that was long the way right my mind 
+ do you fall 
+ those loving that you fall in the moves light 
+ just hear me my mind 
+ you do anything 
+ long light 
+ do anything can be more that would you fall 
+ you fall 
+ just 
+ you could be easily inside 
+ the love should give me that s more dark the soul that s so 
+ the bed 
+ games long 
+ games
+---------------------------------
+Song: eternal flame the bangles, First word: happy
+Generated Lyrics:
+ happy door leave are say 
+ the more at bed 
+ the rest street words there s the day truth again 
+ never i am dry 
+ that went right is you cry i ll t mean i lives 
+ in fire 
+ crying 
+ where the world into my own bed mine i am you ll t care 
+ i d needed hide out 
+ i just i am went away is baby that gets your smile apart with my own is 
+ should cold door 
+ they men truth 
+ isn t be truth again hide music the eyes
+---------------------------------
+Song: honesty billy joel, First word: happy
+Generated Lyrics:
+ happy that got something walk 
+ yes comes like you don t been searching around time headed will yes please change 
+ yes please gotta all time down your dreams they re enough far don t honey boy it 
+ yes shoot the only enough far because yeah whoa or an line pose him could you re easy walk on me on the best all very shoot me like i m all don t talk up 
+ yes you re not said cut around 
+ yes call 
+ yes don t known 
+ you re an four new time knew me
+---------------------------------
+Song: lovefool cardigans, First word: happy
+Generated Lyrics:
+ happy find behind 
+ til 
+ oh it does feel t give home run run run cookin till the sun for fuck want have you blow blow walk vanilla bedroom then losing home for the bed run shady in her freely the run burn chi mony white run run cookin pass run sometimes 
+ for an 
+ i do fuck 
+ after fuck 
+ what for fuck 
+ step it dies fell 
+ she run with her attempt run walk fore there one the who law till there mine it another one run home it 
+ til they knew myself ll
+---------------------------------
+---------sad---------
+---------------------------------
+Song: all the small things blink 182, First word: sad
+Generated Lyrics:
+ sad or there quick say the bear ho ho ho ho ho ho s no young 
+ you go the gonna have never say you will the saw 
+ you 
+ stay 
+ from you call 
+
+---------------------------------
+Song: barbie girl aqua, First word: sad
+Generated Lyrics:
+ sad 
+ the other on the home more the song 
+ chorus 
+ the law that say the light 
+ just 
+ just 
+ you fall out the moves the soul you should let me the scent won t be the way 
+ do me what here right free my own 
+ so do anything you know anything see with you fall apart here s hurt anymore you fall the song girl when you should do i d you cross the meaning 
+ cause i never come once light 
+ you fall 
+ let i would you fall inside is the
+---------------------------------
+Song: eternal flame the bangles, First word: sad
+Generated Lyrics:
+ sad talk are behind truth again i cry 
+ the truth so 
+ i was catch me went little into truth 
+ door but you cry 
+ the way me grow crying 
+ my own truth with my own 
+ the heart 
+ the own truth 
+ upon bed 
+ in this night apart 
+ upon the world into 
+ sleeping eyes truth 
+ the empty bed 
+ in fire 
+ i m morning truth 
+ i ll t never take them 
+ for bed places must are my own truth worry with bed 
+ after truth again again i ll
+---------------------------------
+Song: honesty billy joel, First word: sad
+Generated Lyrics:
+ sad snow them may thought 
+ yes oh don t been searching on the time your own 
+ yes 
+ yes 
+ yes 
+ let me here s true together on hey walk around are like yes oh we re not we don t wanted shoot me like the rest walk 
+ yes don t talk 
+ yes please know the rest around only lovers come plaques 
+ yes shoot the floor 
+ yes oh enough far change walk around your head walk on my moves in magic on the same fingers you 
+ you don t known cut on the
+---------------------------------
+Song: lovefool cardigans, First word: sad
+Generated Lyrics:
+ sad 
+ blow with her run 
+ what will eventually then she run for her areas around run blow there for an hearts pass 
+ oh yeah 
+ she walks cookin the man used runnin 
+ oh white blow 
+ give blowed tha stay 
+ but 
+ the run run 
+ she em went t speak look burn run you slim with 
+ it what run run run run run drink light till what burned run when go t look run for bed behind run get t look for bed 
+ run with her alias 
+ for her alias from the
+---------------------------------
+---------angry---------
+---------------------------------
+Song: all the small things blink 182, First word: angry
+Generated Lyrics:
+ angry ho like ho ho ho ho ho 
+ the saw no don you out me ho ho ho ho from 
+ join you call in show you don me me 
+ those change 
+ when 
+ give you give me ho ho ho 
+ no go s no d you played me 
+ i got don me ho ho from you don is me 
+ your ho ho ho 
+ put the brings the had your no had me 
+ o ho ho ho ho ho ho ho s the can t let you were no say me 
+ 
+
+---------------------------------
+Song: barbie girl aqua, First word: angry
+Generated Lyrics:
+ angry 
+ you the song 
+ just many more more the love you want 
+ you tell me fill you fall out on 
+ you fall million the loving fall 
+ so 
+ you fall the way you do be the music years anywhere the soul 
+ how reaching through the love me me fill it s hard all 
+ let babe you have long my mind 
+ so i just my mind 
+ try save the mom 
+ you see 
+ those dark that through the moves light 
+ just more my mind 
+ the real light 
+ you say
+---------------------------------
+Song: eternal flame the bangles, First word: angry
+Generated Lyrics:
+ angry for fire by my own ring truth 
+ there s world is smile i just i will in truth 
+ we ll t do 
+ name 
+ her 
+ the world into my own above truth started 
+ take it precious truth 
+ my own words was the world truth 
+ the world my own 
+ i want talk 
+ leave little truth back my own as we re so 
+ in fire are my so so smile 
+ her eyes that talk 
+ her fire 
+ the truth i d needed believe little world truth again hide no truth
+---------------------------------
+Song: honesty billy joel, First word: angry
+Generated Lyrics:
+ angry stranger 
+ yes please don t even good fingers with like the floor fell around are 
+ yes please talkin walk on the same fingers me know i m not dirty with the same floor side cut there s fingers 
+ yes oh don t wanted me your mind please ever been searching was holding walk new things hood 
+ bodied dime 
+ yes oh sweet four reflection 
+ yes please walk on wall around never ever turned on everyone said 
+
+---------------------------------
+Song: lovefool cardigans, First word: angry
+Generated Lyrics:
+ angry 
+ well for it ought run run 
+ ooh 
+ for her four the run 
+ i do it 
+ what for bed behind run burn smoke 
+ said 
+ sayin 
+ for bed behind run run run bed 
+ run run run run 
+ what vision slim run run run run run run 
+ blow behind runnin mo n 
+ sayin 
+ run run shot run right even well slim run there 
+ oh huh white till what 
+ she i m losing me anybody was 
+ put blowed haters 
+ before with the well exist then losing the
+---------------------------------

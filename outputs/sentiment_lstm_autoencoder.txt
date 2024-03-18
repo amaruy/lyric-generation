@@ -1,0 +1,253 @@
+lyric generator with autoencoder:
+---------happy---------
+---------------------------------
+Song: all the small things blink 182, First word: happy
+Generated Lyrics:
+ happy ho s give each very you ll t have no young ho ho from 
+ those out 
+ have you 
+ the say you stay go ho ho ho ho ho ho ho x like 
+ those say the got me 
+ you go you me no one spirits 
+ no played 
+ buy me say you 
+ i got the hard stay around ho away flight 
+ those swear you 
+ the say me ho 
+ the an ho ho as those say you out 
+ you give me no knowin man s no had not not you as
+---------------------------------
+Song: barbie girl aqua, First word: happy
+Generated Lyrics:
+ happy 
+ just 
+ you fall 
+ you fall 
+ those moves apart 
+ you should do how how it s easy anything just many bad 
+ the moves in one more the moves 
+ chorus you see you might tell me the soul tell me 
+ you fall you 
+ just it s more cry you do you fall the way s wrong you fall on my mind you talk see you fall you fall 
+ chorus 
+ you do anything say it s not it s more home at the moves apart your name 
+ my mind your heart
+---------------------------------
+Song: eternal flame the bangles, First word: happy
+Generated Lyrics:
+ happy 
+ i am cold truth where mine that by 
+ this could smile no truth him beautiful truth get me that 
+ nothing again 
+ crying the empty 
+ i want for bed mine for bed my own on bed start out my name grow on bed 
+ the tries fine how dry truth was eternity for bed 
+ i love for bed music should cold truth 
+ where the world away truth again that smile with the dream 
+ for bed 
+ i am 
+ the 
+ so 
+ she dry lives again away 
+ perfect smile me 
+
+---------------------------------
+Song: honesty billy joel, First word: happy
+Generated Lyrics:
+ happy 
+ yes what could not said 
+ yes shoot me like yes walk 
+ yes please tell me like yes shoot me like me like each best so we don t known please than look on the only enough far your days puppet 
+ yes shoot me people said that still single floor before open me like we don t wanted 
+ yes oh i m very what could change walk on them said the rest on your floor no three reflection bet 
+ yes please ever been searching 
+ you re no floor five side 
+ yes shoot me
+---------------------------------
+Song: lovefool cardigans, First word: happy
+Generated Lyrics:
+ happy 
+ sayin 
+ after the door blow my illusion behind run 
+ one the name i sentence 
+ but the music dies 
+ lido 
+ oh 
+ it ought run run smoke til raw 
+ but i won t save blow my illusion 
+ hit run party till do em all 
+ oh huh white 
+ she dies light til what s roll run on her alias 
+ i just s go t bud outta 
+ the hair bar 
+ so she s apart 
+ what hit with with fuck myself sing t be there run run run drink drink
+---------------------------------
+---------sad---------
+---------------------------------
+Song: all the small things blink 182, First word: sad
+Generated Lyrics:
+ sad ho out my train 
+ i got 
+ those just by lay no say me no turn 
+ from 
+ last 
+ show in me as the family you know 
+ have you see you ll t put 
+ no loved you don you shine me the want show me 
+ ya don when the scene s es go 
+ those say the came my reason ho ho ho guitar x 
+ when you if you would for the came life comin 
+ que all you no gets you 
+ o when me knowin 
+ there 
+ it say you
+---------------------------------
+Song: barbie girl aqua, First word: sad
+Generated Lyrics:
+ sad you see me what show me 
+ long it s you you do anything holding on the song love love that s the moves right on the moves apart 
+ you fall apart your big light the moves your big the bed more you fall that you fall so you you ever want you that you 
+ the more you fall the best light 
+ games tell me you new way is light 
+ chorus love you be the moves the moves the rules 
+ you just baby the meaning the moves apart 
+ tell me are big the love
+---------------------------------
+Song: eternal flame the bangles, First word: sad
+Generated Lyrics:
+ sad 
+ should make truth apart for my own my own my school truth the 
+ if you smile 
+ should believe 
+ the crowd must more truth i am believe i am must save talking 
+ i was eternity mine truth the pain truth with bed 
+ until we ll trying find my own by 
+ my own tired me moving into my own moving at bed wine again again again 
+ in this once fair truth 
+ that door music 
+ crying apart 
+ i watch cold truth my own 
+ making me 
+ that precious bed 
+ bought
+---------------------------------
+Song: honesty billy joel, First word: sad
+Generated Lyrics:
+ sad 
+ yes love is true 
+ yes shoot me like yes oh on the floor yeah whoa shoot me like yes cry on great 
+ something gonna all something may need enough far have good your own 
+ my go on your way like yes please don t work 
+ yes hopes cut walk on them dirty bet on the best c preacher 
+ yes shoot everybody walk on mine floor side look on the rest like i need enough enough 
+ yes on the door 
+ yes an four new only two floor look around are years told me
+---------------------------------
+Song: lovefool cardigans, First word: sad
+Generated Lyrics:
+ sad 
+ blow next south till 
+ texas with bed run cookin 
+ she ought give blowed 
+ blow run home till i bet it dies 
+ in the door blow behind next blow 
+ what slim with the start 
+ for with em put blowed home 
+ move bed behind run behind run bed through you there 
+ woah the music dies the power but it do em went t more life 
+ sayin 
+ blow see the fantasy til it ought no go t gotta t send t make her do 
+ he 
+ hit run 
+ oh 
+
+---------------------------------
+---------angry---------
+---------------------------------
+Song: all the small things blink 182, First word: angry
+Generated Lyrics:
+ angry 
+ you go 
+ ho say 
+ show you y shine me 
+ no knowin s que ho guitar x the saw 
+ put are you some hard shine show me go 
+ you laugh you go say me 
+ the like ho ho ho ho ho from you in you ve know 
+ don when 
+ it go you go me go 
+ like ho ho ho ho ho ho ho ho ho ho 
+ you in my that knowin day 
+ show 
+ never no walked me ho warm ho guitar is me 
+ put the saw my
+---------------------------------
+Song: barbie girl aqua, First word: angry
+Generated Lyrics:
+ angry you better more the music anywhere you know that moves 
+ from my baby 
+ do not you 
+ the moves it s sorry you come in the love i see you know how you see you fall 
+ let you fall 
+ what it s so 
+ just 
+ the meaning 
+ do babe 
+ do anything know that you 
+ you know you 
+ it s really you 
+ you tell me free the bed i ve been 
+ we just tell me that you you know you know you could tell you fall 
+
+---------------------------------
+Song: eternal flame the bangles, First word: angry
+Generated Lyrics:
+ angry you mine grows 
+ with bed truth little 
+ should dry truth i may happen i call by truth make the world is 
+ i knew 
+ the world 
+ i ll t went into this world into catch 
+ door word for bed 
+ take me went you cry 
+ place when the years you 
+ no truth i am truth are at truth little truth 
+ crying apart word sat into 
+ leave cold truth easy easy people must talk up truth again 
+ should understand little truth i can easy was eternity mine for bed smile 
+
+---------------------------------
+Song: honesty billy joel, First word: angry
+Generated Lyrics:
+ angry 
+ yes or an four change things 
+ yes oh yeah that only enough far chase around hands cubes 
+ yes but when yes oh i am side door 
+ yes shoot what could walk on the rest into the only enough far please been easy time on the same car 
+ please don t work floor side around walk on the time 
+ the rest your nights 
+ yes 
+ the rest walk 
+ yes shoot me the rest walk on the rest 
+ you re not door 
+ yes oh 
+ you need who i m very thought
+---------------------------------
+Song: lovefool cardigans, First word: angry
+Generated Lyrics:
+ angry used occur lead run run into her run run run home 
+ bitch 
+ so i bet long s 
+ hit run run with her one in bed till there s go 
+ they writes damn 
+ find run run 
+ after bed behind bed them man what exist 
+ she 
+ for bed behind run run shady waitin hearts even the never knew now it there 
+ blow are the rain in the run run run 
+ run run run with the bed 
+ losing them s roll run walk sometimes dies you till it 
+ run 
+ blow
+---------------------------------
